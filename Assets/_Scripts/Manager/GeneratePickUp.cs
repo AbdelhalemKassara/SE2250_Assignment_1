@@ -5,10 +5,10 @@ using UnityEngine;
 public class GeneratePickUp : MonoBehaviour
 {
     public GameObject square, cylinder, capsule, player;
-    private GameObject generate;
     public int maxNumOfObjects;
 
     private int numOfObjects;
+    private GameObject generate;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +38,7 @@ public class GeneratePickUp : MonoBehaviour
 
         if(rand == 0)
         {
-            generate = Instantiate(square, generatePosition(), transform.rotation);
+            generate = Instantiate(square, generatePosition(), transform.rotation);//rotation of this object
 
         }
         else if(rand == 1)
@@ -51,7 +51,10 @@ public class GeneratePickUp : MonoBehaviour
             generate = Instantiate(capsule, generatePosition(), transform.rotation);
 
         }
+        //this generates a random color
+        //hueMin, hueMax, sturationMin, saturationMax, valueMin, valueMax
         generate.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        
         generate.GetComponent<CollisionWithPlayer>().player = player;
         generate.GetComponent<CollisionWithPlayer>().generator = gameObject;
     }
@@ -73,7 +76,7 @@ public class GeneratePickUp : MonoBehaviour
         do {
             //the range of the box is -4.5 to 4.5 in both x and z and the max object size is 0.5, so -4.25 to 4.25 is the max position so the objects stay in the box
             newPos = new Vector3(Random.Range(-4.25f, 4.25f), 0.6f, Random.Range(-4.25f, 4.25f));
-            Collider[] col = Physics.OverlapBox(newPos, halfExtends);//creates a square centered at the new location that is 1x1 and returns the gameObjects that intersect
+            Collider[] col = Physics.OverlapBox(newPos, halfExtends);//creates a square centered at the new location that is 1x1 and returns the colliders containing gameObjects that intersect
             
             //if this new position doesn't intersect with anything, exit
             if(col.Length == 0) {

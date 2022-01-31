@@ -32,6 +32,7 @@ public class PickUpObjectsAnimation : MonoBehaviour
             distPerSec = -distPerSec;
             previousTime = Time.timeAsDouble;
         }
+        //makes the object change its position
         transform.position = transform.position + new Vector3(0, distPerSec, 0);
 
     }
