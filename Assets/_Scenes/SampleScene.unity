@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,9 +157,7 @@ MonoBehaviour:
   square: {fileID: 7835106959261884883, guid: b657c67267c78f749af9812e4f3b4f76, type: 3}
   cylinder: {fileID: 335639492160268485, guid: 7ccb2c8a4a16d1c419471ac1fd3a0e09, type: 3}
   capsule: {fileID: 4209831213969955614, guid: ad977612633fcd54195d66524286a15c, type: 3}
-  generate: {fileID: 0}
   player: {fileID: 644308192}
-  newObject: 0
   maxNumOfObjects: 8
 --- !u!4 &24852375
 Transform:

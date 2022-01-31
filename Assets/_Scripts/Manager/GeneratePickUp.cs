@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GeneratePickUp : MonoBehaviour
 {
-    public GameObject square, cylinder, capsule, generate, player;
+    public GameObject square, cylinder, capsule, player;
+    private GameObject generate;
     public int maxNumOfObjects;
 
     private int numOfObjects;
@@ -12,7 +13,6 @@ public class GeneratePickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        numOfObjects = 8;
         generateObjects(maxNumOfObjects);
     }
 
@@ -23,7 +23,6 @@ public class GeneratePickUp : MonoBehaviour
         {
             gameObject.GetComponent<ResetGame>().resetGame();
             generateObjects(maxNumOfObjects);
-            numOfObjects = maxNumOfObjects;
         }
     }
 
@@ -63,10 +62,25 @@ public class GeneratePickUp : MonoBehaviour
         {
             generateObject();
         }
+        numOfObjects = num;
     }
     Vector3 generatePosition()
     {
-        //the range of the box is -4.5 to 4.5 in both x and z and the max object size is 0.5, so -4.25 to 4.25 is the max position so the objects stay in the box 
-        return new Vector3(4.25f * Random.Range(-1.0f, 1.0f), 0.6f, 4.25f * Random.Range(-1.0f, 1.0f));
+        //boundary of intersection on the x and z axis is 1 unit
+        Vector3 halfExtends = new Vector3(0.5f, 0, 0.5f);
+        Vector3 newPos;
+
+        do {
+            //the range of the box is -4.5 to 4.5 in both x and z and the max object size is 0.5, so -4.25 to 4.25 is the max position so the objects stay in the box
+            newPos = new Vector3(Random.Range(-4.25f, 4.25f), 0.6f, Random.Range(-4.25f, 4.25f));
+            Collider[] col = Physics.OverlapBox(newPos, halfExtends);//creates a square centered at the new location that is 1x1 and returns the gameObjects that intersect
+            
+            //if this new position doesn't intersect with anything, exit
+            if(col.Length == 0) {
+                break;
+            }
+        } while(true);
+        
+        return newPos;
     }
 }
